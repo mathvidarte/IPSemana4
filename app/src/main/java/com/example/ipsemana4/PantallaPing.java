@@ -37,14 +37,14 @@ public class PantallaPing extends AppCompatActivity {
                             todos ++;
 
                             InetAddress i = InetAddress.getByName(IPAll);
-                            InetAddress inet = InetAddress.getLocalHost();
-                            String myIP = inet.getHostAddress();
+                          /*  InetAddress inet = InetAddress.getLocalHost();
+                            String myIP = inet.getHostAddress();*/
 
-                            Log.d("SIIIIIIIIIIIII", ""+myIP);
+                           // Log.d("SIIIIIIIIIIIII", ""+myIP);
 
                             Boolean D = i.isReachable(500);
 
-                            Log.d("TAMBIEEEEEEEN", ""+D);
+
                             runOnUiThread(
                                     () -> {
                                         if (D == true) {

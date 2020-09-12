@@ -9,6 +9,9 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText IP1;
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         btnHost = findViewById(R.id.btnHost);
 
 
+
+
         btnPing.setOnClickListener(
                 (v) -> {
 
@@ -60,15 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnHost.setOnClickListener(
                 (v) -> {
+
                     Intent i = new Intent(this, PantallaHost.class);
-
-
-
-
-                    /*SharedPreferences preference =getSharedPreferences("IP", MODE_PRIVATE);
-                    preference.edit().putString("IP1", )*/
-
-
 
                     startActivity(i);
                 }

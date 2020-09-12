@@ -17,6 +17,8 @@ public class PantallaHost extends AppCompatActivity {
 
     private TextView IPHost;
     private Button btnBack;
+    private int last = 1;
+    private String ultimo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +28,35 @@ public class PantallaHost extends AppCompatActivity {
         IPHost = findViewById(R.id.IPHost);
         btnBack = findViewById(R.id.btnBack);
 
-        String IP1 = getIntent().getExtras().getString("IP1");
-        String IP2 = getIntent().getExtras().getString("IP2");
-        String IP3 = getIntent().getExtras().getString("IP3");
-        String IP4 = getIntent().getExtras().getString("IP4");
-        String IPAll = IP1+"."+IP2+"."+"."+IP3+"."+IP4;
+        new Thread(
+            () -> {
+                while (last < 255) {
+
+                    try {
+
+                        ultimo = "192.168.1."+last;
+                        InetAddress i = InetAddress.getByName(ultimo);
+
+                        Boolean P = i.isReachable(500);
+
+                        runOnUiThread(
+                                () -> {
+                                    if (P == true) {
+                                        IPHost.append(""+ultimo+"\n");
+                                    }
+                                }
+                        );
+                        last++;
+                    } catch (UnknownHostException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
 
 
-
-        try {
-            InetAddress i = InetAddress.getByName(IPAll);
-            String divice = i.getHostAddress();
-
-            Boolean D = i.isReachable(800);
-
-            Log.d("VAMOOOOSSSS", " "+D);
-
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+            }
+        ).start();
 
 
 
